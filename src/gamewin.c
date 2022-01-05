@@ -20,6 +20,6 @@ void menuwin(sfRenderWindow *window, runner_t *runner)
         display_bouton(window, runner->boutonlist[i]);
     check_mouse(window, runner);
     switch_window(window, runner);
-    if (sfKeyboard_isKeyPressed(sfKeySpace))
-        runner->menustate = MENU;
+    //if (sfKeyboard_isKeyPressed(sfKeySpace))
+    runner->menustate = MENU;
 }

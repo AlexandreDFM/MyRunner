@@ -15,12 +15,12 @@ enum scene_t {
     PAUSE,
     GAMEOVER,
     GAMEWIN,
-    JUMPFINISH
 };
 
 enum dino_t {
     NORMAL,
     JUMP,
+    JUMPFINISH,
     FALL,
     CROUCH
 };

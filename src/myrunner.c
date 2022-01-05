@@ -99,18 +99,22 @@ void clock_game(runner_t *runner)
     }
 }
 
-void close_window(sfRenderWindow *window, runner_t *runner, sfEvent event)
+void close_window(sfRenderWindow *window, runner_t *runner)
 {
-    if (event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyBackspace)) {
-        if (runner->menumusic)
+    if (runner->event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyBackspace)) {
+        if (runner->menumusic) {
+            sfMusic_stop(runner->menumusic);
             sfMusic_destroy(runner->menumusic);
-        if (runner->gamemusic)
+        }
+        if (runner->gamemusic) {
+            sfMusic_stop(runner->gamemusic);
             sfMusic_destroy(runner->gamemusic);
+        }
         sfRenderWindow_close(window);
     }
 }
 
-void jump(sfRenderWindow *window, runner_t *runner)
+void jumpevent(sfRenderWindow *window, runner_t *runner)
 {
     if (runner->dinostate != CROUCH) {
         if (runner->event.type == sfEvtKeyPressed && runner->event.key.code == sfKeyRShift && runner->dinostate == NORMAL) {
@@ -118,17 +122,22 @@ void jump(sfRenderWindow *window, runner_t *runner)
             runner->dinostate = JUMP;
         }
         if (runner->event.type == sfEvtKeyReleased && runner->event.key.code == sfKeyRShift && runner->dinostate == JUMP) {
-            runner->dinovitesse.y = 0;
+            runner->dinovitesse.y = -runner->dinovitesse.y;
             runner->dinostate = FALL;
         }
         if (runner->event.type != sfEvtKeyPressed && runner->event.key.code == sfKeyRShift && runner->dinostate == JUMPFINISH) {
             runner->dinostate = NORMAL;
         }
+    }
+}
+
+void jump(sfRenderWindow *window, runner_t *runner)
+{
+    if (runner->dinostate != CROUCH) {
         if (runner->dinovitesse.y >= 0 && runner->dinostate == JUMP) {
             runner->dinovitesse.y = 0;
             runner->dinostate = FALL;
         }
-        //printf("%f\n", runner->dinovitesse.y);
         if (runner->dinovitesse.y <= 0 && runner->dinostate == JUMP) {
             runner->dino.positiondino.y += runner->dinovitesse.y;
             runner->dinoreflect.positiondino.y -= runner->dinovitesse.y;
@@ -139,12 +148,11 @@ void jump(sfRenderWindow *window, runner_t *runner)
             runner->dinovitesse.y += runner->gravity.y;
             runner->dinostate = FALL;
         }
-        //printf("%f\n", runner->dinovitesse.y);
-        if (runner->dino.positiondino.y >= 525 && runner->dinovitesse.y > 24 && runner->dinostate == FALL) {
+        if (runner->dino.positiondino.y >= 525 || runner->dinovitesse.y > 24 && runner->dinostate == FALL) {
             runner->dinovitesse.y = -25;
             runner->dino.positiondino.y = 525;
             runner->dinoreflect.positiondino.y = 760;
-            runner->dinostate = JUMPFINISH;
+            runner->dinostate = NORMAL;
         }
     }
 }
@@ -221,7 +229,7 @@ void change_path_color(sfRenderWindow *window, runner_t *runner)
 
 void switch_color(sfRenderWindow *window, runner_t *runner)
 {
-    if (runner->valid[4] == 1 && sfMouse_isButtonPressed(sfMouseLeft)) {
+    if (sfMouse_isButtonPressed(sfMouseLeft) && runner->valid[4] == 1) {
         runner->texturedino += 1;
         my_printf("%d\n", runner->texturedino);
         if (runner->texturedino > 3)
@@ -232,18 +240,16 @@ void switch_color(sfRenderWindow *window, runner_t *runner)
 
 void boucle(sfRenderWindow *window, runner_t *runner)
 {
-    sfEvent event;
     //my_printf("%s\n", runner->path_tdino[0]);
     while (sfRenderWindow_isOpen(window)) {
-        while (sfRenderWindow_pollEvent(window, &event)) {
-            runner->event = event;
-            close_window(window, runner, event);
+        while (sfRenderWindow_pollEvent(window, &runner->event)) {
+            close_window(window, runner);
             switch_color(window, runner);
             if (runner->menustate == GAME) {
-                jump(window, runner);
+                jumpevent(window, runner);
                 crouch(window, runner);
             }
-            if (runner->menustate == GAME && sfKeyboard_isKeyPressed(sfKeyEscape))
+            if (runner->menustate == GAME && runner->event.type == sfEvtKeyPressed && runner->event.key.code == sfKeyEscape)
                 runner->menustate = PAUSE;
         }
         //my_printf("%s\n", runner->path_tdino[0]);
