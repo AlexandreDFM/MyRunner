@@ -35,7 +35,8 @@ void clock_go(sfRenderWindow *window, runner_t *runner)
         }
         sfClock_restart(runner->clockdino);
     }
-    if (sfClock_getElapsedTime(runner->clockdinodead).microseconds > 100000.0) {
+    if (sfClock_getElapsedTime(runner->clockdinodead).
+    microseconds > 100000.0) {
         if (runner->dino.rectdino.left < 90 && runner->dinostate == DEAD)
             move_rectdino(&runner->dino.rectdino, 0, 15, 90);
         sfClock_restart(runner->clockdinodead);

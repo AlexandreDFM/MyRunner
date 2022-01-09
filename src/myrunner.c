@@ -67,7 +67,6 @@ void boucle(sfRenderWindow *window, runner_t *runner)
         change_display(window, runner);
         sfRenderWindow_display(window);
     }
-    destroy_init(runner);
 }
 
 int display_window(char *map)

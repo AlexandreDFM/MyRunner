@@ -30,8 +30,6 @@ void reset_game2(runner_t *runner)
     sfClock_destroy(runner->clockback2);
     sfClock_destroy(runner->clockcloud);
     sfClock_destroy(runner->clockdino);
-    sfMusic_destroy(runner->menumusic);
-    sfMusic_destroy(runner->gamemusic);
 }
 
 void destroy_music(runner_t *runner)
@@ -48,7 +46,7 @@ void destroy_music(runner_t *runner)
         sfMusic_stop(runner->deadmusic);
         sfMusic_destroy(runner->deadmusic);
     }
-    if (runner->deadmusic) {
+    if (runner->victorymusic) {
         sfMusic_stop(runner->victorymusic);
         sfMusic_destroy(runner->victorymusic);
     }
@@ -57,14 +55,8 @@ void destroy_music(runner_t *runner)
 
 void destroy_init(runner_t *runner)
 {
-    create_highscore(runner);
-    sfFont_destroy(runner->font);
-    sfText_destroy(runner->thighscore);
-    sfText_destroy(runner->score);
-    sfClock_destroy(runner->clockback);
-    sfClock_destroy(runner->clockback2);
-    sfClock_destroy(runner->clockcloud);
-    sfClock_destroy(runner->clockdino);
-    sfClock_destroy(runner->clockdinodead);
     reset_game2(runner);
+    sfText_destroy(runner->thighscore);
+    sfClock_destroy(runner->clockdinodead);
+    destroy_music(runner);
 }
