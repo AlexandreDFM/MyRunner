@@ -45,7 +45,7 @@ void print_manual2(void)
     my_putstr("      - 1 = basic snowman\n");
     my_putstr("      - 2 = flying snowman\n");
     my_putstr("      - 4 = coin (+10 to score)\n");
-    my_putstr("      - 4 = flag to finish\n\n");
+    my_putstr("      - 5 = flag to finish\n\n");
 }
 
 int main(int argc, char **argv)
