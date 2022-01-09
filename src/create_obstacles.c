@@ -28,30 +28,39 @@ char *fs_open_file(char *mappath)
     return (buffer);
 }
 
-void switchparse(int i, char *map, chainmob_t mob, chainmob_t *chainmobglobal)
+void parse2(int i, char *map, chainmob_t mob, chainmob_t *chainmobglobal)
 {
-    switch (map[i])
-    {
-        case '1' :
-            my_snowman(i, map, mob, chainmobglobal);
-            break;
-        case '2' :
-            my_flysnowman(i, map, mob, chainmobglobal);
-            break;
-        case '3' :
-            my_snowman(i, map, mob, chainmobglobal);
-            break;
-        case '4' :
-            my_gold(i, map, mob, chainmobglobal);
-            break;
-        case '5' :
-            my_flag(i, map, mob, chainmobglobal);
-            break;
-        default :
-            mob.countain = 0;
-            chainmobglobal[i] = mob;
-        break;
+    if (map[i] == '3') {
+        my_snowman(i, map, mob, chainmobglobal);
+        return;
     }
+    if (map[i] == '4') {
+        my_gold(i, map, mob, chainmobglobal);
+        return;
+    }
+    if (map[i] == '5') {
+        my_flag(i, map, mob, chainmobglobal);
+        return;
+    }
+}
+
+void parse(int i, char *map, chainmob_t mob, chainmob_t *chainmobglobal)
+{
+    if (map[i] != '1' && map[i] != '2' && map[i] != '3'
+    && map[i] != '4' && map[i] != '5') {
+        mob.countain = 0;
+        chainmobglobal[i] = mob;
+        return;
+    }
+    if (map[i] == '1') {
+        my_snowman(i, map, mob, chainmobglobal);
+        return;
+    }
+    if (map[i] == '2') {
+        my_flysnowman(i, map, mob, chainmobglobal);
+        return;
+    }
+    parse2(i, map, mob, chainmobglobal);
 }
 
 chainmob_t *parsemap(char *mappath, runner_t *runner)
@@ -59,10 +68,9 @@ chainmob_t *parsemap(char *mappath, runner_t *runner)
     char *map = fs_open_file(mappath);
     runner->map = map;
     chainmob_t chainmob;
-    //my_putstr(map);
     chainmob_t *chainmobglobal = malloc(sizeof(chainmob_t)*my_strlen(map));
     for (int i = 0; map[i] != '\0'; i++) {
-        switchparse(i, map, chainmob, chainmobglobal);
+        parse(i, map, chainmob, chainmobglobal);
     }
     return (chainmobglobal);
 }

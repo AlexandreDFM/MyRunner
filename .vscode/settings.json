@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "audio.h": "c",
+        "my_printf.h": "c"
+    }
+}

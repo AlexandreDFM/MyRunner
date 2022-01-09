@@ -58,9 +58,4 @@ void display_s(sfRenderWindow *window, runner_t *runner)
     sfText_setCharacterSize(runner->score, 40);
     sfText_setPosition(runner->score, runner->positionscore);
     sfRenderWindow_drawText(window, runner->score, NULL);
-    // sfText_setString(runner->scoretext, "SCORE");
-    // sfText_setFont(runner->scoretext, runner->font);
-    // sfText_setCharacterSize(runner->scoretext, 20);
-    // sfText_setPosition(runner->scoretext, runner->positionscoretext);
-    // sfRenderWindow_drawText(window, runner->scoretext, NULL);
 }

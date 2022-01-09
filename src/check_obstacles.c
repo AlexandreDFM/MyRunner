@@ -18,13 +18,13 @@ int check_snowman(sfRenderWindow *window, snowman_t snowman, runner_t *runner)
     return (sfFloatRect_intersects(&dinopos, &snowmanpos, NULL));
 }
 
-int check_flysnowman(sfRenderWindow *window, flysnowman_t flysnowman, runner_t *runner)
+int check_fsnowman(sfRenderWindow *window, flysnowman_t fsnow, runner_t *run)
 {
-    float posdinox = runner->dino.positiondino.x;
-    float posdinoy = runner->dino.positiondino.y;
+    float posdinox = run->dino.positiondino.x;
+    float posdinoy = run->dino.positiondino.y;
     sfFloatRect dinopos = {posdinox, posdinoy, 15*7, 17*6};
-    float posflysnowmanx = flysnowman.positionflysnowman.x + 13*7;
-    float posflysnowmany = flysnowman.positionflysnowman.y;
+    float posflysnowmanx = fsnow.positionflysnowman.x + 13*7;
+    float posflysnowmany = fsnow.positionflysnowman.y;
     sfFloatRect flysnowmanpos = {posflysnowmanx, posflysnowmany, 21*7, 24*6};
     return (sfFloatRect_intersects(&dinopos, &flysnowmanpos, NULL));
 }
@@ -47,6 +47,6 @@ int check_flag(sfRenderWindow *window, flag_t flag, runner_t *runner)
     sfFloatRect dinopos = {posdinox, posdinoy, 15*7, 17*6.1};
     float posflagx = flag.positionflag.x;
     float posflagy = flag.positionflag.y;
-    sfFloatRect flagpos = {posflagx, posflagy, 18*5, 36*4.1};
+    sfFloatRect flagpos = {posflagx, posflagy-300, 18*5, 36*4.1+400};
     return (sfFloatRect_intersects(&dinopos, &flagpos, NULL));
 }

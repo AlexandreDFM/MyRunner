@@ -26,10 +26,21 @@ SRC    = main.c								\
 		 src/create_obstacles.c				\
 		 src/create_sprite_obstacles.c 		\
 		 src/display_obstacles.c			\
+		 src/display_obstacles2.c			\
 		 src/detect_obstacles.c				\
 		 src/display_score.c				\
 		 src/destroy_sprite.c				\
 		 src/check_obstacles.c				\
+		 src/jump.c							\
+		 src/crouch.c						\
+		 src/color.c						\
+		 src/create_colors.c				\
+		 src/create_sprite_colors.c			\
+		 src/cursor.c						\
+		 src/title.c						\
+		 src/transition.c					\
+		 src/transition_2.c					\
+		 src/change_buttons_coord.c			\
 
 OBJ    = $(SRC:.c=.o)
 

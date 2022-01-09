@@ -14,8 +14,4 @@
 
 void destroy_game(runner_t *runner)
 {
-    //destroy char
-    //reset back pos
-    //reset scan mobs
-    //more
 }

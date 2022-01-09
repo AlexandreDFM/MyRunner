@@ -21,13 +21,16 @@ back_t create_back(const char *path_texture, sfVector2f pos, sfIntRect rect)
     back.rectback = rect;
     sfVector2f resize = {7, 6.1};
     back.resize = resize;
+    sfSprite_setTexture(back.s_back, back.t_back, sfTrue);
+    sfSprite_setPosition(back.s_back, back.positionback);
+    sfSprite_setScale(back.s_back, back.resize);
     return (back);
 }
 
-bouton_t create_bouton(const char *path_texture, sfVector2f pos, sfIntRect rect)
+bouton_t create_bouton(const char *texture, sfVector2f pos, sfIntRect rect)
 {
     bouton_t bouton;
-    bouton.t_bouton = sfTexture_createFromFile(path_texture, NULL);
+    bouton.t_bouton = sfTexture_createFromFile(texture, NULL);
     bouton.s_bouton = sfSprite_create();
     bouton.positionbouton = pos;
     bouton.rectbouton = rect;
