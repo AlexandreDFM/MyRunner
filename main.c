@@ -37,6 +37,8 @@ void print_manual(void)
 void print_manual2(void)
 {
     my_putstr("      - Jump with RSHIFT and Crouch with LShift.\n");
+    my_putstr("      - On Menu you can change dino color by clicking "
+    "on it.\n");
     my_putstr("\n                                                  "
                 "MAPS\n\n");
     my_putstr("  You can create your map using a .txt file in the maps "
