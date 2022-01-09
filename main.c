@@ -30,8 +30,8 @@ void print_manual(void)
     my_putstr("      - Once in game press escape to pause.\n");
     my_putstr("      - If paused press space or click on the play bouton to "
                 "resume, you can also click on the exit bouton to exit.\n");
-    my_putstr("      - If you Game Over you can press Retry or Escape bouton"
-    "to close.\n");
+    my_putstr("      - If you Game Over you can press Play Again or "
+    "Escape bouton to close.\n");
 }
 
 void print_manual2(void)
@@ -39,10 +39,12 @@ void print_manual2(void)
     my_putstr("      - Jump with RSHIFT and Crouch with LShift.\n");
     my_putstr("\n                                                  "
                 "MAPS\n\n");
+    my_putstr("  You can create your map using a .txt file in the maps "
+                "directory (see map1.txt for an exemple)\n");
     my_putstr("  Replace empty spaces with numbers of your choice\n\n");
     my_putstr("      - 1 = basic snowman\n");
     my_putstr("      - 2 = flying snowman\n");
-    my_putstr("      - 4 = coin\n");
+    my_putstr("      - 4 = coin (+10 to score)\n");
     my_putstr("      - 4 = flag to finish\n\n");
 }
 
