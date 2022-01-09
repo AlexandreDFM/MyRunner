@@ -36,7 +36,7 @@ void print_manual(void)
 
 void print_manual2(void)
 {
-    my_putstr("      - Jump with Space and Crouch with L-Shift.\n\n");
+    my_putstr("      - Jump with RSHIFT and Crouch with LShift.\n\n");
 }
 
 int main(int argc, char **argv)

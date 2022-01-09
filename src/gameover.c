@@ -93,8 +93,7 @@ void switch_windowgo(sfRenderWindow *window, runner_t *runner)
         return;
     }
     if (sfMouse_isButtonPressed(sfMouseLeft) && runner->valid[1] == 1) {
-        sfMusic_destroy(runner->menumusic);
-        sfMusic_destroy(runner->gamemusic);
+        destroy_init(runner);
         sfRenderWindow_close(window);
         return;
     }

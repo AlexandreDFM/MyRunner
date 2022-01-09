@@ -213,6 +213,7 @@ int create_highscore(runner_t *runner);
 void check_highscore(runner_t *runner);
 char *make_score(runner_t *runner);
 char *make_highscore(runner_t *runner);
+void init_texture(runner_t *runner);
 char **t_dino(void);
 char **t_dino_d(void);
 char **t_dino_crouch(void);
@@ -235,7 +236,9 @@ void switch_color(sfRenderWindow *window, runner_t *runner);
 void crouch(sfRenderWindow *window, runner_t *runner);
 void jumpevent(sfRenderWindow *window, runner_t *runner);
 void jump(sfRenderWindow *window, runner_t *runner);
-void clock_game(runner_t *runner);
+void game_clock(runner_t *runner);
+void third_clock(runner_t *runner);
+void switch_first_clock(runner_t *runner, int i);
 void transition(sfRenderWindow *window, runner_t *runner);
 void transitionmenu(sfRenderWindow *window, runner_t *runner);
 void transitionwin(sfRenderWindow *window, runner_t *runner);
@@ -298,5 +301,6 @@ void check_mouse_go(sfRenderWindow *window, runner_t *runner);
 int display_window(char *map);
 void game_init(runner_t *runner);
 void reset_game(runner_t *runner);
+void destroy_init(runner_t *runner);
 
 #endif

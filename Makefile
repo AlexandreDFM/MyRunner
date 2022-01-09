@@ -16,6 +16,8 @@ SRC    = main.c								\
 		 src/display.c						\
 		 src/myrunner.c						\
 		 src/move_rect.c					\
+		 src/clock.c						\
+		 src/clock_2.c						\
 		 src/game.c							\
 		 src/gamepause.c					\
 		 src/gamemenu.c						\
@@ -23,6 +25,8 @@ SRC    = main.c								\
 		 src/gameover_2.c					\
 		 src/gamewin.c						\
 		 src/init_struct.c					\
+		 src/init_struct_2.c				\
+		 src/destroy_init.c					\
 		 src/destroy_variables.c			\
 		 src/create_obstacles.c				\
 		 src/create_sprite_obstacles.c 		\

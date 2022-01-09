@@ -71,7 +71,7 @@ void parse2(int i, char *map, chainmob_t mob, chainmob_t *chainmobglobal)
 
 void parse(int i, char *map, chainmob_t mob, chainmob_t *chainmobglobal)
 {
-    if (map[i] != '1' && map[i] != '2' && map[i] != '3'
+    if (map[i] != '1' && map[i] != '2'
     && map[i] != '4' && map[i] != '5') {
         mob.countain = 0;
         chainmobglobal[i] = mob;

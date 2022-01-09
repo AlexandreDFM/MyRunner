@@ -14,7 +14,7 @@
 
 #include <stdlib.h>
 
-void game_init(runner_t *runner)
+void game_init2(runner_t *runner)
 {
     runner->scorenb = 0;
     sfVector2f positionscore = {830, 980};
@@ -25,19 +25,15 @@ void game_init(runner_t *runner)
     runner->score = score;
     runner->chainmob = parsemap(runner->pathmap, runner);
     char *path_texturedinoreflect = "./sprites/dino_sprites_blue_reflect.png";
-    sfVector2f positiondino = {40, 525};
-    sfVector2f positiondinoreflect = {40, 760};
-    sfIntRect rectdino = {0, 0, 15, 17};
     runner->cursor = create_cursor("./sprites/cursor.png");
     sfVector2f titlepos = {288+400, 70};
     runner->title = create_title("./sprites/title.png", titlepos);
     runner->gravity = (sfVector2f) {0, 1};
     runner->dinovitesse = (sfVector2f) {0, -25.0};
-    runner->dino = create_dino(runner->path_tdino[runner->texturedino],
-    positiondino, rectdino);
-    runner->dinoreflect = create_dino(
-    runner->path_tdino_r[runner->texturedino], positiondinoreflect, rectdino);
-    runner->dinostate = NORMAL;
+}
+
+void game_init3(runner_t *runner)
+{
     runner->clockback = sfClock_create();
     runner->clockback2 = sfClock_create();
     runner->clockcloud = sfClock_create();
@@ -49,21 +45,44 @@ void game_init(runner_t *runner)
     runner->victorymusic = sfMusic_createFromFile("./music/mariovictory.ogg");
     runner->coinbuffer = sfSoundBuffer_createFromFile("./music/coinsound.ogg");
     runner->coinsound = sfSound_create();
+}
+
+void game_init(runner_t *runner)
+{
+    game_init2(runner);
+    game_init3(runner);
+    sfVector2f positiondino = {40, 525};
+    sfVector2f positiondinoreflect = {40, 760};
+    sfIntRect rectdino = {0, 0, 15, 17};
+    runner->dino = create_dino(runner->path_tdino[runner->texturedino],
+    positiondino, rectdino);
+    runner->dinoreflect = create_dino(
+    runner->path_tdino_r[runner->texturedino], positiondinoreflect, rectdino);
+    runner->dinostate = NORMAL;
     sfSound_setBuffer(runner->coinsound, runner->coinbuffer);
     sfSound_setVolume(runner->coinsound, 15);
 }
 
-void reset_game(runner_t *runner)
+void init_bouton(runner_t *runner)
 {
-    sfFont_destroy(runner->font);
-    sfText_destroy(runner->score);
-    runner->chainmob = parsemap(runner->pathmap, runner);
-    sfClock_destroy(runner->clockback);
-    sfClock_destroy(runner->clockback2);
-    sfClock_destroy(runner->clockcloud);
-    sfClock_destroy(runner->clockdino);
-    sfMusic_destroy(runner->menumusic);
-    sfMusic_destroy(runner->gamemusic);
+    char *pathbtn[7] = {"./sprites/play_game.png",
+    "./sprites/quit_prog.png", "./sprites/play_again.png",
+    "./sprites/play_menu.png", "./sprites/retry.png",
+    "./sprites/continue.png", "./sprites/dino_run_blue.png"};
+    sfVector2f posbtn[7] = { (sfVector2f) {328+530, 200+240},
+    (sfVector2f) {328+530, 250+240}, (sfVector2f) {328+530, 136+240},
+    (sfVector2f) {328+530, 250+240}, (sfVector2f) {328+530, 200+240},
+    (sfVector2f) {306+530, 146+240}, (sfVector2f) {40, 525}};
+    sfIntRect rectbtn[5] = {(sfIntRect) {0, 0, 144, 50},
+    (sfIntRect) {0, 0, 144, 89}, (sfIntRect) {0, 0, 140, 46},
+    (sfIntRect) {0, 0, 188, 50}, (sfIntRect) {0, 0, 15, 17}};
+    runner->boutonlist[0] = create_bouton(pathbtn[0], posbtn[0], rectbtn[0]);
+    runner->boutonlist[1] = create_bouton(pathbtn[1], posbtn[1], rectbtn[0]);
+    runner->boutonlist[2] = create_bouton(pathbtn[2], posbtn[2], rectbtn[1]);
+    runner->boutonlist[3] = create_bouton(pathbtn[3], posbtn[3], rectbtn[0]);
+    runner->boutonlist[4] = create_bouton(pathbtn[4], posbtn[4], rectbtn[2]);
+    runner->boutonlist[5] = create_bouton(pathbtn[5], posbtn[5], rectbtn[3]);
+    runner->boutonlist[6] = create_bouton(pathbtn[6], posbtn[6], rectbtn[4]);
 }
 
 void create_a_party(runner_t *runner)
@@ -72,41 +91,8 @@ void create_a_party(runner_t *runner)
     runner->loadstate = GAMELOAD;
     create_highscore(runner);
     runner->thighscore = sfText_create();
-    char *pathback[5] = {"./sprites/backg.png", "./sprites/foreground.png",
-    "./sprites/cloud.png", "./sprites/decor_arbre.png", "./sprites/sol.png"};
-    dino_colors_create(runner);
-    dino_colors_sprite_create(runner);
-    char *pathbtn[7] = {"./sprites/play_game.png",
-    "./sprites/quit_prog.png", "./sprites/play_again.png",
-    "./sprites/play_menu.png", "./sprites/retry.png",
-    "./sprites/continue.png", "./sprites/dino_run_blue.png"};
-    sfVector2f positionback = {0, 0};
-    sfIntRect rectback = {0, 0, 544, 178};
-    for (int i = 0; i < 5; i++)
-        runner->backlist[i] = create_back(pathback[i], positionback, rectback);
-    runner->transition = c_transi("./sprites/transition.png",
-    positionback, rectback);
-
-    sfVector2f playbpos = {328+530, 200+240};
-    sfVector2f quitbpos = {328+530, 250+240};
-    sfVector2f pabpos = {328+530, 136+240};
-    sfVector2f menubpos = {328+530, 250+240};
-    sfVector2f retrybpos = {328+530, 200+240};
-    sfVector2f ctnbpos = {306+530, 146+240};
-
-    sfVector2f dinobpos = {40, 525};
-    sfIntRect rectbtn = {0, 0, 144, 50};
-    sfIntRect rectbtnpa = {0, 0, 144, 89};
-    sfIntRect rectbtnretry = {0, 0, 140, 46};
-    sfIntRect rectbtnctn = {0, 0, 188, 50};
-    sfIntRect rectdinobtn = {0, 0, 15, 17};
-    runner->boutonlist[0] = create_bouton(pathbtn[0], playbpos, rectbtn);
-    runner->boutonlist[1] = create_bouton(pathbtn[1], quitbpos, rectbtn);
-    runner->boutonlist[2] = create_bouton(pathbtn[2], pabpos, rectbtnpa);
-    runner->boutonlist[3] = create_bouton(pathbtn[3], menubpos, rectbtn);
-    runner->boutonlist[4] = create_bouton(pathbtn[4], retrybpos, rectbtnretry);
-    runner->boutonlist[5] = create_bouton(pathbtn[5], ctnbpos, rectbtnctn);
-    runner->boutonlist[6] = create_bouton(pathbtn[6], dinobpos, rectdinobtn);
+    init_texture(runner);
+    init_bouton(runner);
     runner->valid[6] = 0;
     runner->boutonlist[6].resize = (sfVector2f) {7, 6.1};
     runner->texturedino = 0;
