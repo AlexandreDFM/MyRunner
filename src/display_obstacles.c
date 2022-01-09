@@ -16,9 +16,11 @@ void display_chainmob2(sfRenderWindow *window, runner_t *run, int i)
 {
     if (run->chainmob[i].countain == 4) {
         display_gold(window, run->chainmob[i].gold);
+        display_gold(window, run->chainmob[i].goldreflect);
     }
     if (run->chainmob[i].countain == 5) {
         display_flag(window, run->chainmob[i].flag);
+        display_flag(window, run->chainmob[i].flagreflect);
     }
 }
 
@@ -27,12 +29,15 @@ void display_chainmob(sfRenderWindow *window, runner_t *runner)
     for (int i = 0; runner->map[i] != '\0'; i++) {
         if (runner->chainmob[i].countain == 1) {
             display_snowman(window, runner->chainmob[i].snowman);
+            display_snowman(window, runner->chainmob[i].snowmanreflect);
         }
         if (runner->chainmob[i].countain == 2) {
             display_flysnowman(window, runner->chainmob[i].flysnowman);
+            display_flysnowman(window, runner->chainmob[i].flysnowmanreflect);
         }
         if (runner->chainmob[i].countain == 3) {
             display_snowman(window, runner->chainmob[i].snowman);
+            display_snowman(window, runner->chainmob[i].snowmanreflect);
         }
         display_chainmob2(window, runner, i);
     }

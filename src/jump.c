@@ -65,7 +65,8 @@ void jump(sfRenderWindow *window, runner_t *runner)
         && runner->dinostate == FALL) {
             fall_jump(window, runner);
         }
-        if (runner->dino.positiondino.y >= 525 || runner->dinovitesse.y > 24
+        if (runner->dino.positiondino.y >= 525 && runner->dinostate != DEAD
+        || runner->dinovitesse.y > 24
         && runner->dinostate == FALL) {
             reset_jump(window, runner);
         }

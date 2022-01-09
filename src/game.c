@@ -66,10 +66,10 @@ void game(sfRenderWindow *window, runner_t *runner)
     for (int i = 0; i < 5; i++) {
         display_back(window, runner->backlist[i]);
     }
-    display_s(window, runner);
     jump(window, runner);
     display_chainmob(window, runner);
     check_collision(window, runner);
     display_dino(window, runner->dino);
     display_dino(window, runner->dinoreflect);
+    display_s(window, runner);
 }

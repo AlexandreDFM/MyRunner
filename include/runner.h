@@ -23,6 +23,7 @@ enum scene_t {
 
 enum dino_t {
     NORMAL,
+    DEAD,
     JUMP,
     JUMPFINISH,
     FALL,
@@ -146,7 +147,9 @@ typedef struct chainmob
     flysnowman_t flysnowmanreflect;
     enemie3_t enemie3;
     gold_t gold;
+    gold_t goldreflect;
     flag_t flag;
+    flag_t flagreflect;
 }chainmob_t;
 
 typedef struct runner
@@ -157,7 +160,9 @@ typedef struct runner
     int texturedino;
     char *map;
     char *pathmap;
+    char *highscore;
     char **path_tdino;
+    char **path_tdino_d;
     char **path_tdino_c;
     char **path_tdino_r;
     char **path_tdino_c_r;
@@ -175,6 +180,7 @@ typedef struct runner
     sfVector2f dinovitesse;
     dino_t dino;
     sfTexture **all_t_dino;
+    sfTexture **all_t_dino_d;
     sfTexture **all_t_dino_c;
     dino_t dinoreflect;
     sfTexture **all_t_dino_r;
@@ -182,28 +188,39 @@ typedef struct runner
     sfClock *clockback;
     sfClock *clockback2;
     sfClock *clockdino;
+    sfClock *clockdinodead;
     sfClock *clockcloud;
     sfMusic *menumusic;
     sfMusic *gamemusic;
+    sfMusic *deadmusic;
     sfMusic *victorymusic;
     sfSoundBuffer *coinbuffer;
     sfSound *coinsound;
     sfVector2f positionscore;
     sfFont *font;
     sfText *score;
+    sfText *thighscore;
     gold_t scoreicon;
 }runner_t;
 
 #ifndef RUNNER
     #define RUNNER
 
-char *fs_open_file(char *mappath);
+char *fs_open_file(char *mappath, int size_of_read);
+int count_int_read(char *mappath);
+char *my_put_nbrstr(int number);
+int create_highscore(runner_t *runner);
+void check_highscore(runner_t *runner);
+char *make_score(runner_t *runner);
+char *make_highscore(runner_t *runner);
 char **t_dino(void);
+char **t_dino_d(void);
 char **t_dino_crouch(void);
 char **t_dino_reflect(void);
 char **t_dino_crouch_reflect(void);
 void dino_colors_create(runner_t *runner);
 sfTexture **t_sprite_dino(runner_t *runner);
+sfTexture **t_sprite_dino_d(runner_t *runner);
 sfTexture **t_sprite_dino_crouch(runner_t *runner);
 sfTexture **t_sprite_dino_reflect(runner_t *runner);
 sfTexture **t_sprite_dino_crouch_reflect(runner_t *run);
@@ -223,7 +240,8 @@ void transition(sfRenderWindow *window, runner_t *runner);
 void transitionmenu(sfRenderWindow *window, runner_t *runner);
 void transitionwin(sfRenderWindow *window, runner_t *runner);
 void transitiongo(sfRenderWindow *window, runner_t *runner);
-void winanimation(sfRenderWindow *window, runner_t *runner) ;
+void winanimation(sfRenderWindow *window, runner_t *runner);
+void goanimation(sfRenderWindow *window, runner_t *runner);
 void menu(sfRenderWindow *window, runner_t *runner);
 void game(sfRenderWindow *window, runner_t *runner);
 void gamepause(sfRenderWindow *window, runner_t *runner);
@@ -271,9 +289,12 @@ void display_gold(sfRenderWindow *window, gold_t gold);
 void display_flag(sfRenderWindow *window, flag_t flag);
 void display_chainmob(sfRenderWindow *window, runner_t *runner);
 void display_chainmob2(sfRenderWindow *window, runner_t *run, int i);
+void display_highscore(sfRenderWindow *window, runner_t *runner);
 void display_bouton(sfRenderWindow *window, bouton_t bouton);
 void switch_window(sfRenderWindow *window, runner_t *runner);
+void switch_windowgo(sfRenderWindow *window, runner_t *runner);
 void check_mouse(sfRenderWindow *window, runner_t *runner);
+void check_mouse_go(sfRenderWindow *window, runner_t *runner);
 int display_window(char *map);
 void game_init(runner_t *runner);
 void reset_game(runner_t *runner);

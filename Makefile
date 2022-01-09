@@ -20,6 +20,7 @@ SRC    = main.c								\
 		 src/gamepause.c					\
 		 src/gamemenu.c						\
 		 src/gameover.c						\
+		 src/gameover_2.c					\
 		 src/gamewin.c						\
 		 src/init_struct.c					\
 		 src/destroy_variables.c			\
@@ -36,11 +37,13 @@ SRC    = main.c								\
 		 src/color.c						\
 		 src/create_colors.c				\
 		 src/create_sprite_colors.c			\
+		 src/create_dead.c					\
 		 src/cursor.c						\
 		 src/title.c						\
 		 src/transition.c					\
 		 src/transition_2.c					\
 		 src/change_buttons_coord.c			\
+		 src/highscore.c					\
 
 OBJ    = $(SRC:.c=.o)
 

@@ -18,7 +18,7 @@
 void clock_game(runner_t *runner)
 {
     if (sfClock_getElapsedTime(runner->clockback).microseconds > 16700.0) {
-        move_rectback(&runner->backlist[2].rectback, 1, 272);
+        //move_rectback(&runner->backlist[2].rectback, 2, 272);
         move_rectback(&runner->backlist[3].rectback, 1, 272);
         move_rectback(&runner->backlist[4].rectback, 1, 272);
         runner->scorenb += 1;
@@ -27,24 +27,32 @@ void clock_game(runner_t *runner)
             {
                 case 1 :
                     runner->chainmob[i].snowman.positionsnowman.x -= 7.3;
+                    runner->chainmob[i].snowmanreflect.positionsnowman.x -= 7.3;
                     break;
                 case 2 :
                     runner->chainmob[i].flysnowman.positionflysnowman.x -= 7.3;
+                    runner->chainmob[i].flysnowmanreflect.positionflysnowman.x -= 7.3;
                     break;
                 // case 3 :
                 //     runner->chainmob[i].snowman.positionsnowman.x -= 7.3;
                 //     break;
                 case 4 :
                     runner->chainmob[i].gold.positiongold.x -= 7.3;
+                    runner->chainmob[i].goldreflect.positiongold.x -= 7.3;
                     break;
                 case 5 :
                     runner->chainmob[i].flag.positionflag.x -= 7.3;
+                    runner->chainmob[i].flagreflect.positionflag.x -= 7.3;
                     break;
             }
         }
         sfClock_restart(runner->clockback);
     }
-    if (sfClock_getElapsedTime(runner->clockback2).microseconds > 20000.0) {
+    if (sfClock_getElapsedTime(runner->clockcloud).microseconds > 20000.0) {
+        move_rectback(&runner->backlist[2].rectback, 1, 272);
+        sfClock_restart(runner->clockcloud);
+    }
+    if (sfClock_getElapsedTime(runner->clockback2).microseconds > 50000.0) {
         move_rectback(&runner->backlist[1].rectback, 1, 272);
         sfClock_restart(runner->clockback2);
     }
@@ -56,11 +64,13 @@ void clock_game(runner_t *runner)
                         break;
                     case 2 :
                         move_rectsnowman(&runner->chainmob[i].flysnowman.rectflysnowman, 34, 102);
+                        move_rectsnowman(&runner->chainmob[i].flysnowmanreflect.rectflysnowman, 34, 102);
                         break;
                     // case 3 :
                     //     break;
                     case 4 :
                         move_rectsnowman(&runner->chainmob[i].gold.rectgold, 12, 84);
+                        move_rectsnowman(&runner->chainmob[i].goldreflect.rectgold, 12, 84);
                         break;
                     case 5 :
                         break;

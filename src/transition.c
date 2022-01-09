@@ -42,7 +42,9 @@ void display_transition(sfRenderWindow *window, transition_t transi)
 
 void transitiongo(sfRenderWindow *window, runner_t *runner)
 {
-    if (runner->transition.recttransition.left < 6256) {
+    if (runner->dino.positiondino.y < 1880) {
+        goanimation(window, runner);
+    } else if (runner->transition.recttransition.left < 6256) {
         for (int i = 0; i < 5; i++)
             display_back(window, runner->backlist[i]);
         display_transition(window, runner->transition);

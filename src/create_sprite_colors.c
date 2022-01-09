@@ -51,6 +51,7 @@ sfTexture **t_sprite_dino_crouch_reflect(runner_t *run)
 void dino_colors_sprite_create(runner_t *runner)
 {
     runner->all_t_dino = t_sprite_dino(runner);
+    runner->all_t_dino_d = t_sprite_dino_d(runner);
     runner->all_t_dino_r = t_sprite_dino_reflect(runner);
     runner->all_t_dino_c = t_sprite_dino_crouch(runner);
     runner->all_t_dino_c_r = t_sprite_dino_crouch_reflect(runner);

@@ -42,8 +42,10 @@ void game_init(runner_t *runner)
     runner->clockback2 = sfClock_create();
     runner->clockcloud = sfClock_create();
     runner->clockdino = sfClock_create();
+    runner->clockdinodead = sfClock_create();
     runner->menumusic = sfMusic_createFromFile("./music/spidermanmusic.ogg");
     runner->gamemusic = sfMusic_createFromFile("./music/mariomusic.ogg");
+    runner->deadmusic = sfMusic_createFromFile("./music/mariodead.ogg");
     runner->victorymusic = sfMusic_createFromFile("./music/mariovictory.ogg");
     runner->coinbuffer = sfSoundBuffer_createFromFile("./music/coinsound.ogg");
     runner->coinsound = sfSound_create();
@@ -68,6 +70,8 @@ void create_a_party(runner_t *runner)
 {
     runner->menustate = MENU;
     runner->loadstate = GAMELOAD;
+    create_highscore(runner);
+    runner->thighscore = sfText_create();
     char *pathback[5] = {"./sprites/backg.png", "./sprites/foreground.png",
     "./sprites/cloud.png", "./sprites/decor_arbre.png", "./sprites/sol.png"};
     dino_colors_create(runner);

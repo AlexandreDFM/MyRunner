@@ -50,6 +50,27 @@ char *make_score(runner_t *runner)
     return (my_revstr(nb));
 }
 
+char *make_highscore(runner_t *runner)
+{
+    int nbhighscore = my_getnbr(runner->highscore);
+    char *nb = my_put_nbrstr(nbhighscore);
+    if (my_strlen(nb) < 6) {
+        char *nb2 = malloc(sizeof(char)*7);
+        int i = 0;
+        for (; i < my_strlen(nb); i++)
+            nb2[i] = nb[i];
+        for (; i < 6; i++)
+            nb2[i] = '0';
+        nb2[i] = '\0';
+        my_revstr(nb2);
+        return (nb2);
+    } else if (my_strlen(nb) > 6) {
+        runner->scorenb = 0;
+        return ("000000");
+    }
+    return (my_revstr(nb));
+}
+
 void display_s(sfRenderWindow *window, runner_t *runner)
 {
     display_gold(window, runner->scoreicon);

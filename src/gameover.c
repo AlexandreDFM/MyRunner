@@ -22,6 +22,61 @@ void check_mouse_go(sfRenderWindow *window, runner_t *runner)
     runner->valid[1] = sfFloatRect_contains(&quit, posmousex, posmousey);
 }
 
+void clock_go(sfRenderWindow *window, runner_t *runner)
+{
+    if (sfClock_getElapsedTime(runner->clockdino).microseconds > 50000.0) {
+        if (runner->dinostate == DEAD)
+            runner->dino.positiondino.y += 25;
+        move_rectsnowman(&runner->scoreicon.rectgold, 12, 84);
+        if (runner->dinostate == CROUCH) {
+            move_rectdino(&runner->dino.rectdino, 0, 18, 108);
+        } else if (runner->dinostate != DEAD) {
+            move_rectdino(&runner->dino.rectdino, 0, 15, 105);
+        }
+        sfClock_restart(runner->clockdino);
+    }
+    if (sfClock_getElapsedTime(runner->clockdinodead).microseconds > 100000.0) {
+        if (runner->dino.rectdino.left < 90 && runner->dinostate == DEAD)
+            move_rectdino(&runner->dino.rectdino, 0, 15, 90);
+        sfClock_restart(runner->clockdinodead);
+    }
+}
+
+void go_check_animation(sfRenderWindow *window, runner_t *runner)
+{
+    if (runner->dinostate != NORMAL && runner->dinostate != CROUCH) {
+        clock_go(window, runner);
+        jump(window, runner);
+        display_dino(window, runner->dino);
+    } else if (runner->dinostate == CROUCH) {
+        runner->dinostate = NORMAL;
+    }
+    if (runner->dinostate == NORMAL) {
+        runner->dino.t_dino = runner->all_t_dino_d[runner->texturedino];
+        runner->dino.rectdino = (sfIntRect) {0, 0, 15, 18};
+        sfClock_restart(runner->clockdinodead);
+        runner->dinostate = DEAD;
+    }
+    if (runner->dinostate == DEAD) {
+        clock_go(window, runner);
+        display_dino(window, runner->dino);
+    }
+}
+
+void goanimation(sfRenderWindow *window, runner_t *runner)
+{
+    if (sfMusic_getStatus(runner->deadmusic) == 0) {
+        sfMusic_play(runner->deadmusic);
+    }
+    for (int i = 0; i < 5; i++) {
+        display_back(window, runner->backlist[i]);
+    }
+    display_s(window, runner);
+    display_chainmob(window, runner);
+    display_dino(window, runner->dinoreflect);
+    go_check_animation(window, runner);
+}
+
 void switch_windowgo(sfRenderWindow *window, runner_t *runner)
 {
     if (sfMouse_isButtonPressed(sfMouseLeft) && runner->valid[2] == 1) {
@@ -43,24 +98,4 @@ void switch_windowgo(sfRenderWindow *window, runner_t *runner)
         sfRenderWindow_close(window);
         return;
     }
-}
-
-void menugo(sfRenderWindow *window, runner_t *runner)
-{
-    if (runner->loadstate == GAMELOAD) {
-        change_butons_coord_go(runner);
-        reset_game(runner);
-        game_init(runner);
-        runner->loadstate = GAMEUNLOAD;
-    }
-    if (sfMusic_getStatus(runner->menumusic) == 0) {
-        sfMusic_play(runner->menumusic);
-    }
-    for (int i = 0; i < 5; i++)
-        display_back(window, runner->backlist[i]);
-    for (int i = 1; i < 4; i++)
-        display_bouton(window, runner->boutonlist[i]);
-    check_mouse_go(window, runner);
-    switch_windowgo(window, runner);
-    cursor(window, runner->cursor);
 }

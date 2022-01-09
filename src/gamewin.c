@@ -42,6 +42,8 @@ void winanimation(sfRenderWindow *window, runner_t *runner)
 void menuwin(sfRenderWindow *window, runner_t *runner)
 {
     if (runner->loadstate == GAMELOAD) {
+        check_highscore(runner);
+        create_highscore(runner);
         reset_game(runner);
         game_init(runner);
     }

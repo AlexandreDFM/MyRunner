@@ -65,6 +65,7 @@ void menu(sfRenderWindow *window, runner_t *runner)
     display_bouton(window, runner->boutonlist[6]);
     display_dino(window, runner->dinoreflect);
     display_title(window, runner->title);
+    display_highscore(window, runner);
     check_mouse(window, runner);
     switch_window(window, runner);
     cursor(window, runner->cursor);

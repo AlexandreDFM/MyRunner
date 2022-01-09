@@ -51,6 +51,7 @@ char **t_dino_crouch_reflect(void)
 void dino_colors_create(runner_t *runner)
 {
     runner->path_tdino = t_dino();
+    runner->path_tdino_d = t_dino_d();
     runner->path_tdino_c = t_dino_crouch();
     runner->path_tdino_r = t_dino_reflect();
     runner->path_tdino_c_r = t_dino_crouch_reflect();

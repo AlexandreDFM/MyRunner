@@ -13,19 +13,44 @@
 #include <SFML/Audio.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 
-char *fs_open_file(char *mappath)
+char *fs_open_file(char *mappath, int size_of_read)
 {
-    char *buffer = malloc(sizeof(char)*(157 + 1));
+    char *buffer = malloc(sizeof(char)*(size_of_read + 1));
     int fd = open(mappath, O_RDONLY);
     int total_read = 0, n_read = 0;
     while ((n_read = read(fd, buffer + total_read,
-    (157 + 1) - total_read)) > 0) {
+    (size_of_read + 1) - total_read)) > 0) {
         total_read += n_read;
     }
-    buffer[157] = '\0';
+    buffer[size_of_read] = '\0';
     return (buffer);
+}
+
+int count_int_read(char *mappath)
+{
+    char *map = "";
+    char *line_buf = NULL;
+    size_t line_buf_size = 0;
+    int line_count = 0;
+    int read_size = 0;
+    ssize_t line_size;
+    FILE *fp = fopen(mappath, "r");
+    if (!fp) {
+        return 84;
+    }
+    line_size = getline(&line_buf, &line_buf_size, fp);
+    while (line_size >= 0) {
+        line_count++;
+        read_size += (int) line_size;
+        line_size = getline(&line_buf, &line_buf_size, fp);
+    }
+    free(line_buf);
+    line_buf = NULL;
+    fclose(fp);
+    return read_size;
 }
 
 void parse2(int i, char *map, chainmob_t mob, chainmob_t *chainmobglobal)
@@ -65,7 +90,8 @@ void parse(int i, char *map, chainmob_t mob, chainmob_t *chainmobglobal)
 
 chainmob_t *parsemap(char *mappath, runner_t *runner)
 {
-    char *map = fs_open_file(mappath);
+    int size_of_read = count_int_read(mappath);
+    char *map = fs_open_file(mappath, size_of_read);
     runner->map = map;
     chainmob_t chainmob;
     chainmob_t *chainmobglobal = malloc(sizeof(chainmob_t)*my_strlen(map));
