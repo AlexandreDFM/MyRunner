@@ -30,7 +30,7 @@ void check_mouse(sfRenderWindow *window, runner_t *runner)
 void switch_window(sfRenderWindow *window, runner_t *runner)
 {
     if (sfMouse_isButtonPressed(sfMouseLeft) && runner->valid[0] == 1) {
-        runner->menustate = GAME;
+        runner->menustate = TRANSITION;
         sfMusic_stop(runner->menumusic);
     }
     else if (sfMouse_isButtonPressed(sfMouseLeft) && runner->valid[1] == 1) {
