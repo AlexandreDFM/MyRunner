@@ -27,6 +27,8 @@ void close_window(sfRenderWindow *window, runner_t *runner)
 
 void change_display(sfRenderWindow *window, runner_t *runner)
 {
+    if (!sfRenderWindow_isOpen(window))
+        return;
     if (runner->menustate == TRANSITION)
         transition(window, runner);
     if (runner->menustate == TRANSITIONMENU)
@@ -47,22 +49,27 @@ void change_display(sfRenderWindow *window, runner_t *runner)
         menuwin(window, runner);
 }
 
+void check_events(sfRenderWindow *window, runner_t *runner)
+{
+    close_window(window, runner);
+    if (runner->menustate == MENU) {
+        switch_color(window, runner);
+    }
+    if (runner->menustate == GAME) {
+        jumpevent(window, runner);
+        crouch(window, runner);
+    }
+    if (runner->menustate == GAME &&
+    runner->event.type == sfEvtKeyPressed &&
+    runner->event.key.code == sfKeyEscape)
+        runner->menustate = PAUSE;
+}
+
 void boucle(sfRenderWindow *window, runner_t *runner)
 {
     while (sfRenderWindow_isOpen(window)) {
         while (sfRenderWindow_pollEvent(window, &runner->event )) {
-            close_window(window, runner);
-            if (runner->menustate == MENU) {
-                switch_color(window, runner);
-            }
-            if (runner->menustate == GAME) {
-                jumpevent(window, runner);
-                crouch(window, runner);
-            }
-            if (runner->menustate == GAME &&
-            runner->event.type == sfEvtKeyPressed &&
-            runner->event.key.code == sfKeyEscape)
-                runner->menustate = PAUSE;
+            check_events(window, runner);
         }
         change_display(window, runner);
         sfRenderWindow_display(window);
@@ -81,7 +88,4 @@ int display_window(char *map)
     sfRenderWindow_setFramerateLimit(window, 60);
     sfRenderWindow_setMouseCursorVisible (window, sfFalse);
     boucle(window, &runner);
-    if (window) {
-        sfRenderWindow_close(window);
-    }
 }

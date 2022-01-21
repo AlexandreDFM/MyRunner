@@ -50,9 +50,17 @@ char *make_score(runner_t *runner)
     return (my_revstr(nb));
 }
 
+int my_atoi(char *str)
+{
+    int res = 0;
+    for (int i = 0; str[i] != '\0'; ++i)
+        res = res * 10 + str[i] - '0';
+    return res;
+}
+
 char *make_highscore(runner_t *runner)
 {
-    int nbhighscore = my_getnbr(runner->highscore);
+    int nbhighscore = my_atoi(runner->highscore);
     char *nb = my_put_nbrstr(nbhighscore);
     if (my_strlen(nb) < 6) {
         char *nb2 = malloc(sizeof(char)*7);

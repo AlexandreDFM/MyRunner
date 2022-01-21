@@ -9,7 +9,7 @@
 
 int my_compute_square_root(int nb)
 {
-    int sqrt = nb/2;
+    int sqrt = nb / 2;
     int temp = 0;
     if (nb < 0)
         return (0);

@@ -26,7 +26,7 @@ void game_init2(runner_t *runner)
     runner->chainmob = parsemap(runner->pathmap, runner);
     char *path_texturedinoreflect = "./sprites/dino_sprites_blue_reflect.png";
     runner->cursor = create_cursor("./sprites/cursor.png");
-    sfVector2f titlepos = {288+400, 70};
+    sfVector2f titlepos = {288 + 400, 70};
     runner->title = create_title("./sprites/title.png", titlepos);
     runner->gravity = (sfVector2f) {0, 1};
     runner->dinovitesse = (sfVector2f) {0, -25.0};
@@ -69,10 +69,10 @@ void init_bouton(runner_t *runner)
     "./sprites/quit_prog.png", "./sprites/play_again.png",
     "./sprites/play_menu.png", "./sprites/retry.png",
     "./sprites/continue.png", "./sprites/dino_run_blue.png"};
-    sfVector2f posbtn[7] = { (sfVector2f) {328+530, 200+240},
-    (sfVector2f) {328+530, 250+240}, (sfVector2f) {328+530, 136+240},
-    (sfVector2f) {328+530, 250+240}, (sfVector2f) {328+530, 200+240},
-    (sfVector2f) {306+530, 146+240}, (sfVector2f) {40, 525}};
+    sfVector2f posbtn[7] = { (sfVector2f) {328 + 530, 200 + 240},
+    (sfVector2f) {328 + 530, 250 + 240}, (sfVector2f) {328 + 530, 136 + 240},
+    (sfVector2f) {328 + 530, 250 + 240}, (sfVector2f) {328 + 530, 200 + 240},
+    (sfVector2f) {306 + 530, 146 + 240}, (sfVector2f) {40, 525}};
     sfIntRect rectbtn[5] = {(sfIntRect) {0, 0, 144, 50},
     (sfIntRect) {0, 0, 144, 89}, (sfIntRect) {0, 0, 140, 46},
     (sfIntRect) {0, 0, 188, 50}, (sfIntRect) {0, 0, 15, 17}};

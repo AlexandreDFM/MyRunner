@@ -46,13 +46,14 @@ SRC    = main.c								\
 		 src/title.c						\
 		 src/transition.c					\
 		 src/transition_2.c					\
+		 src/transition_3.c					\
 		 src/change_buttons_coord.c			\
 		 src/highscore.c					\
 
 OBJ    = $(SRC:.c=.o)
 
-LIBFLAG    = -L ./lib/my/ -lmy -I ./include -g3 -lcsfml-graphics -lcsfml-window \
--lcsfml-system -lcsfml-audio													\
+LIBFLAG    = -L ./lib/my/ -lmy -I ./include -g3 -lcsfml-graphics 		\
+-lcsfml-window -lcsfml-system -lcsfml-audio								\
 
 all: $(NAME)
 

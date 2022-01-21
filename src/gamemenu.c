@@ -19,7 +19,7 @@ void check_mouse(sfRenderWindow *window, runner_t *runner)
     sfFloatRect quit = {sfSprite_getPosition(runner->boutonlist[1].s_bouton).x,
     sfSprite_getPosition(runner->boutonlist[1].s_bouton).y, 144, 50};
     sfFloatRect col = {sfSprite_getPosition(runner->boutonlist[6].s_bouton).x,
-    sfSprite_getPosition(runner->boutonlist[6].s_bouton).y, 15*7, 17*6};
+    sfSprite_getPosition(runner->boutonlist[6].s_bouton).y, 15 * 7, 17 * 6};
     float posmousex = sfMouse_getPositionRenderWindow(window).x;
     float posmousey = sfMouse_getPositionRenderWindow(window).y;
     runner->valid[0] = sfFloatRect_contains(&play, posmousex, posmousey);
@@ -32,10 +32,8 @@ void switch_window(sfRenderWindow *window, runner_t *runner)
     if (sfMouse_isButtonPressed(sfMouseLeft) && runner->valid[0] == 1) {
         runner->menustate = TRANSITION;
         sfMusic_stop(runner->menumusic);
-    }
-    else if (sfMouse_isButtonPressed(sfMouseLeft) && runner->valid[1] == 1) {
-        sfMusic_destroy(runner->menumusic);
-        sfMusic_destroy(runner->gamemusic);
+    } else if (sfMouse_isButtonPressed(sfMouseLeft) && runner->valid[1] == 1) {
+        destroy_init(runner);
         sfRenderWindow_close(window);
     }
 }

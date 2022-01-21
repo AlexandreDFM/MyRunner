@@ -50,7 +50,11 @@ void destroy_music(runner_t *runner)
         sfMusic_stop(runner->victorymusic);
         sfMusic_destroy(runner->victorymusic);
     }
-    sfSoundBuffer_destroy(runner->coinbuffer);
+    if (runner->coinsound) {
+        sfSound_stop(runner->coinsound);
+        sfSound_destroy(runner->coinsound);
+        sfSoundBuffer_destroy(runner->coinbuffer);
+    }
 }
 
 void destroy_init(runner_t *runner)
@@ -59,4 +63,5 @@ void destroy_init(runner_t *runner)
     sfText_destroy(runner->thighscore);
     sfClock_destroy(runner->clockdinodead);
     destroy_music(runner);
+    return;
 }

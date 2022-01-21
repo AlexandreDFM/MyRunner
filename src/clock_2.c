@@ -21,8 +21,7 @@ void switch_first_clock2(runner_t *runner, int i, int j)
 
 void switch_first_clock(runner_t *runner, int i)
 {
-    switch (runner->chainmob[i].countain)
-        {
+    switch (runner->chainmob[i].countain) {
             case 1 :
                 switch_first_clock2(runner, i, 1);
                 break;
@@ -57,8 +56,7 @@ void third_clock2(runner_t *runner, int i, int j)
 void third_clock(runner_t *runner)
 {
     for (int i = 0; runner->map[i] != '\0'; i++) {
-        switch (runner->chainmob[i].countain)
-        {
+        switch (runner->chainmob[i].countain) {
             case 1 :
                 break;
             case 2 :

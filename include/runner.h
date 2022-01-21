@@ -35,14 +35,7 @@ enum load_t {
     GAMELOAD
 };
 
-typedef struct framebuffer {
-    unsigned int width;
-    unsigned int height;
-    sfUint8 *pixels;
-}framebuffer_t;
-
-typedef struct background
-{
+typedef struct background {
     sfSprite *s_back;
     sfTexture *t_back;
     sfVector2f positionback;
@@ -50,8 +43,7 @@ typedef struct background
     sfVector2f resize;
 }back_t;
 
-typedef struct transition
-{
+typedef struct transition {
     sfSprite *s_transition;
     sfTexture *t_transition;
     sfVector2f positiontransition;
@@ -59,8 +51,7 @@ typedef struct transition
     sfVector2f resize;
 }transition_t;
 
-typedef struct title
-{
+typedef struct title {
     sfSprite *s_title;
     sfTexture *t_title;
     sfVector2f positiontitle;
@@ -69,14 +60,12 @@ typedef struct title
 
 }title_t;
 
-typedef struct cursor
-{
+typedef struct cursor {
     sfSprite *s_cursor;
     sfTexture *t_cursor;
 }cursor_t;
 
-typedef struct bouton
-{
+typedef struct bouton {
     sfSprite *s_bouton;
     sfTexture *t_bouton;
     sfVector2f positionbouton;
@@ -84,8 +73,7 @@ typedef struct bouton
     sfVector2f resize;
 }bouton_t;
 
-typedef struct dino
-{
+typedef struct dino {
     sfSprite *s_dino;
     sfTexture *t_dino;
     sfVector2f positiondino;
@@ -93,8 +81,7 @@ typedef struct dino
     sfVector2f resize;
 }dino_t;
 
-typedef struct snowman
-{
+typedef struct snowman {
     sfSprite *s_snowman;
     sfTexture *t_snowman;
     sfVector2f positionsnowman;
@@ -102,8 +89,7 @@ typedef struct snowman
     sfVector2f resize;
 }snowman_t;
 
-typedef struct flysnowman
-{
+typedef struct flysnowman {
     sfSprite *s_flysnowman;
     sfTexture *t_flysnowman;
     sfVector2f positionflysnowman;
@@ -111,8 +97,7 @@ typedef struct flysnowman
     sfVector2f resize;
 }flysnowman_t;
 
-typedef struct enemie3
-{
+typedef struct enemie3 {
     sfSprite *s_enemie3;
     sfTexture *t_enemie3;
     sfVector2f positionenemie3;
@@ -120,8 +105,7 @@ typedef struct enemie3
     sfVector2f resize;
 }enemie3_t;
 
-typedef struct gold
-{
+typedef struct gold {
     sfSprite *s_gold;
     sfTexture *t_gold;
     sfVector2f positiongold;
@@ -129,8 +113,7 @@ typedef struct gold
     sfVector2f resize;
 }gold_t;
 
-typedef struct flag
-{
+typedef struct flag {
     sfSprite *s_flag;
     sfTexture *t_flag;
     sfVector2f positionflag;
@@ -138,8 +121,7 @@ typedef struct flag
     sfVector2f resize;
 }flag_t;
 
-typedef struct chainmob
-{
+typedef struct chainmob {
     int countain;
     snowman_t snowman;
     snowman_t snowmanreflect;
@@ -152,8 +134,7 @@ typedef struct chainmob
     flag_t flagreflect;
 }chainmob_t;
 
-typedef struct runner
-{
+typedef struct runner {
     int valid[6];
     int dinojump;
     int scorenb;
